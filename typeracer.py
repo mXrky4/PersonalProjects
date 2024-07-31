@@ -79,6 +79,12 @@ def check_typing(event=None):
         result = (f"Time Taken: {time_taken:.2f} seconds\n"
                   f"Accuracy: {accuracy:.2f}%\n"
                   f"Typing Speed: {words_per_minute:.2f} WPM")
+        
+         # Save the result to the game records
+        game_records.append({
+                'time_taken': time_taken,
+                'accuracy': accuracy,
+                'words_per_minute': words_per_minute})
 
     
         messagebox.showinfo("Results", result)
@@ -103,7 +109,25 @@ def update_timer():
 def stop_timer():
     global timer_running
     timer_running = False
+
+def show_records():
+    if game_records:
+        records_text = "Game Records:\n\n"
+        for i, record in enumerate(game_records):
+            records_text += (f"Game {i+1}:\n"
+                             f"Time Taken: {record['time_taken']:.2f} seconds\n"
+                             f"Accuracy: {record['accuracy']:.2f}%\n"
+                             f"Typing Speed: {record['words_per_minute']:.2f} WPM\n\n")
+        records_text = records_text.strip()
+    else:
+        records_text = "No records available."
     
+    messagebox.showinfo("Game Records", records_text)
+
+# Initialize global variables
+game_records = []
+timer_running = False
+
 
 
 root = tk.Tk()
