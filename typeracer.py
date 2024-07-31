@@ -48,10 +48,6 @@ def calculate_accuracy(user_input, passage):
     correct_chars = sum(1 for u, p in zip(user_input, passage) if u == p)
     return (correct_chars / len(passage)) * 100
 
-def calculate_accuracy(user_input, passage):
-    correct_chars = sum(1 for u, p in zip(user_input, passage) if u == p)
-    return (correct_chars / len(passage)) * 100
-
 def start_typing_game():
     global passage, start_time, timer_running
     passage = random.choice(get_passages())
@@ -160,10 +156,13 @@ def on_type(event=None):
     passage_text.config(state=tk.DISABLED)
 
 def play_music():
-    pygame.mixer.init()
-    pygame.mixer.music.load("Pure Imagination - Lofi Cover.mp3")  # Replace with your music file
-    pygame.mixer.music.set_volume(0.2)  # Set volume (0.0 to 1.0)
-    pygame.mixer.music.play(-1)  # Loop the music indefinitely
+    try:
+        pygame.mixer.init()
+        pygame.mixer.music.load("Pure Imagination - Lofi Cover.mp3")  # Replace with your music file
+        pygame.mixer.music.set_volume(0.2)  # Set volume (0.0 to 1.0)
+        pygame.mixer.music.play(-1)  # Loop the music indefinitely
+    except pygame.error as e:
+        print(f"Error loading music: {e}")
 
 # Initialize global variables
 game_records = []
@@ -187,6 +186,8 @@ passage_text.pack(pady=20)
 user_input = tk.Entry(root, width=80, font=('Arial', 16))
 user_input.pack(pady=20)
 
+instructions_label = tk.Label(root, text="Press Enter when you finish typing", font=("Arial", 14))
+instructions_label.pack(pady=10)
 
 start_button = tk.Button(root, text="Start Game", command=start_typing_game, font=('Arial', 16))
 start_button.pack(pady=20)
