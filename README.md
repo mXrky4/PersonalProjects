@@ -3,7 +3,7 @@
 Welcome to my Simple Python Typing Game! This game challenges you to type a passage of text as quickly and accurately as possible. Track your typing speed and accuracy with real-time feedback and enjoy background music while you play.
 
 <div align="center">
-    <img src="images/pythontyping.jpg" alt="Game Screenshot" width="600"/>
+    <img src="images/pythontyping.jpg" alt="Game Screenshot" width="200"/>
 </div>
 
 ## Features
