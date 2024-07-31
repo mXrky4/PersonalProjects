@@ -31,6 +31,7 @@ import tkinter as tk
 from tkinter import messagebox
 import time
 import random
+import pygame
 
 def get_passages():
     return [ "We're no strangers to love",
@@ -158,6 +159,12 @@ def on_type(event=None):
                 
     passage_text.config(state=tk.DISABLED)
 
+def play_music():
+    pygame.mixer.init()
+    pygame.mixer.music.load("Pure Imagination - Lofi Cover.mp3")  # Replace with your music file
+    pygame.mixer.music.set_volume(0.2)  # Set volume (0.0 to 1.0)
+    pygame.mixer.music.play(-1)  # Loop the music indefinitely
+
 # Initialize global variables
 game_records = []
 timer_running = False
@@ -180,8 +187,6 @@ passage_text.pack(pady=20)
 user_input = tk.Entry(root, width=80, font=('Arial', 16))
 user_input.pack(pady=20)
 
-check_button = tk.Button(root, text="Finish", command=check_typing, font=('Arial', 16))
-check_button.pack(pady=20)
 
 start_button = tk.Button(root, text="Start Game", command=start_typing_game, font=('Arial', 16))
 start_button.pack(pady=20)
@@ -194,5 +199,8 @@ user_input.bind("<Return>", check_typing)
 
 # Bind the typing event to update the passage color
 user_input.bind("<KeyRelease>", on_type)
+
+#play background music
+play_music()
 
 root.mainloop()
