@@ -61,5 +61,5 @@ Decide whether to play again or exit.
 Music Not Playing: Ensure the music file is correctly placed and named. Check for any error messages in the terminal related to Pygame.
 Library Issues: Verify that Pygame is installed properly. You can reinstall it using pip.
 
-### Play Online
+### Play Now
 [Download and Play](https://mxrkydev.itch.io/simple-python-typeracer)
