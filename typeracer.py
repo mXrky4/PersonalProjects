@@ -33,13 +33,15 @@ import time
 import random
 
 def get_passages():
-    return [ "We're no strangers to love.",
-            "You know the rules and so do I.", 
+    return [ "We're no strangers to love",
+            "You know the rules and so do I", 
             "A full commitment's what I'm thinking of", 
             "You wouldn't get this from any other guy",
             "I just wanna tell you how I'm feeling",
             "Gotta make you understand",
-            "Never gonna give you up.Never gonna let you down. Never gonna run around and desert you"]
+            "Never gonna give you up" , 
+            "Never gonna let you down", 
+            "Never gonna run around and desert you"]
 
 def calculate_accuracy(user_input, passage):
     correct_chars = sum(1 for u, p in zip(user_input, passage) if u == p)
@@ -50,7 +52,7 @@ def calculate_accuracy(user_input, passage):
     return (correct_chars / len(passage)) * 100
 
 def start_typing_game():
-    global passage, start_time
+    global passage, start_time, timer_running
     passage = random.choice(get_passages())
     passage_label.config(text="Type the following passage as quickly as you can:")
     passage_text.config(state=tk.NORMAL)
@@ -60,11 +62,15 @@ def start_typing_game():
     user_input.delete(0, tk.END)
     user_input.focus()
     start_time = time.time()
+    timer_running = True
+    update_timer()
 
-def check_typing():
-    global start_time
-    user_text = user_input.get()
+def check_typing(event=None):
+    global timer_running
+    if timer_running:
+        user_text = user_input.get()
     if user_text == passage:
+        timer_running = False  # Stop the timer
         end_time = time.time()
         time_taken = end_time - start_time
         accuracy = calculate_accuracy(user_text, passage)
@@ -81,6 +87,17 @@ def check_typing():
             start_typing_game()
     else:
             root.quit()
+
+def update_timer():
+    if timer_running:
+        elapsed_time = time.time() - start_time
+        minutes, seconds = divmod(int(elapsed_time), 60)
+        timer_label.config(text=f"Time Elapsed: {minutes:02}:{seconds:02}")
+        root.after(1000, update_timer)  # Update the timer every second
+
+def stop_timer():
+    global timer_running
+    timer_running = False
     
 
 
@@ -102,5 +119,11 @@ check_button.pack(pady=10)
 
 start_button = tk.Button(root, text="Start Game", command=start_typing_game)
 start_button.pack(pady=10)
+
+timer_label = tk.Label(root, text="Time Elapsed: 00:00")
+timer_label.pack(pady=10)
+
+# Bind the "Enter" key to the check_typing function
+user_input.bind("<Return>", check_typing)
 
 root.mainloop()
