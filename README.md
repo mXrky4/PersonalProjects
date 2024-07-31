@@ -2,7 +2,7 @@
 
 Welcome to my Simple Python Typing Game! This game challenges you to type a passage of text as quickly and accurately as possible. Track your typing speed and accuracy with real-time feedback and enjoy background music while you play.
 
-![Game Screenshot](images/pythontyping.png)
+![Game Screenshot](images/pythontyping.jpg)
 
 ## Features
 
