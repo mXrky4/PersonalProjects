@@ -167,24 +167,27 @@ timer_running = False
 root = tk.Tk()
 root.title("Typeracer Game")
 
+# Set the size of the window
+root.geometry("800x600")  # Width x Height
+
 # Widgets
-passage_label = tk.Label(root, text="", wraplength=400)
-passage_label.pack(pady=10)
+passage_label = tk.Label(root, text="", wraplength=780, font=("Arial", 16) )
+passage_label.pack(pady=20)
 
-passage_text = tk.Text(root, height=4, width=50, wrap=tk.WORD, state=tk.DISABLED)
-passage_text.pack(pady=10)
+passage_text = tk.Text(root, height=6, width=80, wrap=tk.WORD, state=tk.DISABLED, font=('Arial', 16))
+passage_text.pack(pady=20)
 
-user_input = tk.Entry(root, width=50)
-user_input.pack(pady=10)
+user_input = tk.Entry(root, width=80, font=('Arial', 16))
+user_input.pack(pady=20)
 
-check_button = tk.Button(root, text="Finish", command=check_typing)
-check_button.pack(pady=10)
+check_button = tk.Button(root, text="Finish", command=check_typing, font=('Arial', 16))
+check_button.pack(pady=20)
 
-start_button = tk.Button(root, text="Start Game", command=start_typing_game)
-start_button.pack(pady=10)
+start_button = tk.Button(root, text="Start Game", command=start_typing_game, font=('Arial', 16))
+start_button.pack(pady=20)
 
-timer_label = tk.Label(root, text="Time Elapsed: 00:00")
-timer_label.pack(pady=10)
+timer_label = tk.Label(root, text="Time Elapsed: 00:00", font=('Arial', 16))
+timer_label.pack(pady=20)
 
 # Bind the "Enter" key to the check_typing function
 user_input.bind("<Return>", check_typing)
