@@ -81,12 +81,17 @@ def check_typing(event=None):
                   f"Typing Speed: {words_per_minute:.2f} WPM")
 
     
-    messagebox.showinfo("Results", result)
-    replay = messagebox.askyesno("Play Again", "Do you want to play again?")
-    if replay:
-            start_typing_game()
+        messagebox.showinfo("Results", result)
+        replay = messagebox.askyesno("Play Again", "Do you want to play again?")
+        if replay:
+                start_typing_game()
+        else:
+                root.quit()
     else:
-            root.quit()
+            # Show an error message and reset the input field
+            messagebox.showwarning("Typing Error", "The text does not match. Please try again!")
+            user_input.delete(0, tk.END)  # Clear the text entry field
+            user_input.focus()  # Refocus on the text entry field
 
 def update_timer():
     if timer_running:
