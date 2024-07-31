@@ -41,7 +41,7 @@ Download the music file (Pure Imagination - Lofi Cover.mp3) and place it in the 
 Execute the Python script to start the game:
 
 ```bash
-python game.py
+python typeracer.py
 ```
 The game window should appear, allowing you to start playing.
 
