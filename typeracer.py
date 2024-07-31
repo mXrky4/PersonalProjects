@@ -80,6 +80,7 @@ def check_typing(event=None):
                   f"Accuracy: {accuracy:.2f}%\n"
                   f"Typing Speed: {words_per_minute:.2f} WPM")
         
+        
          # Save the result to the game records
         game_records.append({
                 'time_taken': time_taken,
@@ -88,6 +89,12 @@ def check_typing(event=None):
 
     
         messagebox.showinfo("Results", result)
+
+         # Display all records
+        show_records()
+
+        
+
         replay = messagebox.askyesno("Play Again", "Do you want to play again?")
         if replay:
                 start_typing_game()
@@ -106,18 +113,19 @@ def update_timer():
         timer_label.config(text=f"Time Elapsed: {minutes:02}:{seconds:02}")
         root.after(1000, update_timer)  # Update the timer every second
 
-def stop_timer():
-    global timer_running
-    timer_running = False
-
 def show_records():
     if game_records:
         records_text = "Game Records:\n\n"
+        total_wpm = 0
         for i, record in enumerate(game_records):
             records_text += (f"Game {i+1}:\n"
                              f"Time Taken: {record['time_taken']:.2f} seconds\n"
                              f"Accuracy: {record['accuracy']:.2f}%\n"
                              f"Typing Speed: {record['words_per_minute']:.2f} WPM\n\n")
+            total_wpm += record['words_per_minute']
+        
+        average_wpm = total_wpm / len(game_records) if game_records else 0
+        records_text += (f"Average WPM: {average_wpm:.2f}")
         records_text = records_text.strip()
     else:
         records_text = "No records available."
