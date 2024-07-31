@@ -63,15 +63,4 @@ Library Issues: Verify that Pygame is installed properly. You can reinstall it u
 
 ### Play Online
 You can also play the game directly on Itch.io. Enjoy the game online without needing to download anything!
-
-```vbnet
-
-**Explanation:**
-
-- **Link Formatting:** Use Markdown to create a clickable link to your Itch.io page. It will look like this: `[Itch.io](https://mxrkydev.itch.io/simple-python-typeracer)`.
-- **Image Formatting:** The image is included with HTML tags for alignment. Ensure that `images/pythontyping.jpg` is correctly placed in your repository or hosting platform.
-- **How to Play Section:** Lists the steps to play the game.
-
-Make sure to update the file paths and URLs according to your project's structure and hosting.
-
-```
+[Itch.io](https://mxrkydev.itch.io/simple-python-typeracer)
