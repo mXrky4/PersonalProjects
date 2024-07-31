@@ -55,10 +55,16 @@ def start_typing_game():
     global passage, start_time, timer_running
     passage = random.choice(get_passages())
     passage_label.config(text="Type the following passage as quickly as you can:")
+
+    # Set the passage text in grey
     passage_text.config(state=tk.NORMAL)
     passage_text.delete(1.0, tk.END)
     passage_text.insert(tk.END, passage)
+    passage_text.tag_configure('grey', foreground='grey')
+    passage_text.tag_add('grey', '1.0', tk.END)
     passage_text.config(state=tk.DISABLED)
+
+
     user_input.delete(0, tk.END)
     user_input.focus()
     start_time = time.time()
@@ -86,8 +92,6 @@ def check_typing(event=None):
                 'time_taken': time_taken,
                 'accuracy': accuracy,
                 'words_per_minute': words_per_minute})
-
-    
         messagebox.showinfo("Results", result)
 
          # Display all records
@@ -132,6 +136,28 @@ def show_records():
     
     messagebox.showinfo("Game Records", records_text)
 
+def on_type(event=None):
+    user_text = user_input.get()
+    display_passage = passage
+
+    # Set all text to grey
+    passage_text.config(state=tk.NORMAL)
+    passage_text.delete(1.0, tk.END)
+    passage_text.insert(tk.END, display_passage)
+    passage_text.tag_configure('grey', foreground='grey')
+    passage_text.tag_add('grey', '1.0', tk.END)
+
+    # Check the user input and update text color
+    for i, char in enumerate(user_text):
+        if i < len(passage):
+            if char == passage[i]:
+                passage_text.tag_add('black', f"1.{i}", f"1.{i+1}")
+                passage_text.tag_configure('black', foreground='black')
+            else:
+                passage_text.tag_configure('grey', foreground='grey')
+                
+    passage_text.config(state=tk.DISABLED)
+
 # Initialize global variables
 game_records = []
 timer_running = False
@@ -162,5 +188,8 @@ timer_label.pack(pady=10)
 
 # Bind the "Enter" key to the check_typing function
 user_input.bind("<Return>", check_typing)
+
+# Bind the typing event to update the passage color
+user_input.bind("<KeyRelease>", on_type)
 
 root.mainloop()
