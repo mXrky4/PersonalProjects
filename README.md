@@ -26,3 +26,33 @@ First, clone the repository to your local machine:
 ```bash
 git clone https://github.com/mxrky4/Simple_Python_Typeracer.git
 cd Simple_Python_Typeracer
+
+
+### 2. Install Dependencies
+Make sure you have Python 3 installed. Then, install the required Python libraries:
+
+```bash
+pip install pygame
+
+### 3. Download Music File
+Download the music file (Pure Imagination - Lofi Cover.mp3) and place it in the same directory as your Python script. Ensure the file name matches exactly or update the filename in the code accordingly.
+
+### 4. Run the Game
+Execute the Python script to start the game:
+
+```bash
+python game.py
+
+The game window should appear, allowing you to start playing.
+
+### How to Play
+Click "Start Game" to begin.
+Type the provided passage as quickly and accurately as possible.
+Press "Enter" when you finish typing to submit.
+View your results, including time taken, accuracy, and typing speed.
+Decide whether to play again or exit.
+
+
+### Troubleshooting
+Music Not Playing: Ensure the music file is correctly placed and named. Check for any error messages in the terminal related to Pygame.
+Library Issues: Verify that Pygame is installed properly. You can reinstall it using pip.
