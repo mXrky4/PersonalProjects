@@ -27,6 +27,8 @@ START
         EXIT
 END
 '''
+import tkinter as tk
+from tkinter import messagebox
 import time
 import random
 
@@ -34,48 +36,71 @@ def get_passages():
     return [ "We're no strangers to love.",
             "You know the rules and so do I.", 
             "A full commitment's what I'm thinking of", 
-            "You wouldn't get this from any other guy"]
+            "You wouldn't get this from any other guy",
+            "I just wanna tell you how I'm feeling",
+            "Gotta make you understand",
+            "Never gonna give you up.Never gonna let you down. Never gonna run around and desert you"]
 
 def calculate_accuracy(user_input, passage):
     correct_chars = sum(1 for u, p in zip(user_input, passage) if u == p)
     return (correct_chars / len(passage)) * 100
 
-def typing_game():
-    passages = get_passages()
-    passage = random.choice(passages)
+def calculate_accuracy(user_input, passage):
+    correct_chars = sum(1 for u, p in zip(user_input, passage) if u == p)
+    return (correct_chars / len(passage)) * 100
 
-
-# display passage
-    print("Type the following passage as quickly as you can:")
-    print(passage)
-   
-
-# capture user input
+def start_typing_game():
+    global passage, start_time
+    passage = random.choice(get_passages())
+    passage_label.config(text="Type the following passage as quickly as you can:")
+    passage_text.config(state=tk.NORMAL)
+    passage_text.delete(1.0, tk.END)
+    passage_text.insert(tk.END, passage)
+    passage_text.config(state=tk.DISABLED)
+    user_input.delete(0, tk.END)
+    user_input.focus()
     start_time = time.time()
-    user_input = input("Start typing:")
-    end_time = time.time()
+
+def check_typing():
+    global start_time
+    user_text = user_input.get()
+    if user_text == passage:
+        end_time = time.time()
+        time_taken = end_time - start_time
+        accuracy = calculate_accuracy(user_text, passage)
+        words_per_minute = (len(user_text.split()) / (time_taken / 60)) if time_taken > 0 else 0
+        
+        result = (f"Time Taken: {time_taken:.2f} seconds\n"
+                  f"Accuracy: {accuracy:.2f}%\n"
+                  f"Typing Speed: {words_per_minute:.2f} WPM")
+
+    
+    messagebox.showinfo("Results", result)
+    replay = messagebox.askyesno("Play Again", "Do you want to play again?")
+    if replay:
+            start_typing_game()
+    else:
+            root.quit()
     
 
-# calculating speed and accuracy
-    time_taken = end_time - start_time
-    accuracy = calculate_accuracy(user_input, passage)
-    words_per_minute = (len(user_input.split()) / (time_taken / 60)) if time_taken > 0 else 0
-    
 
-#display result
-    print(f"Time Taken: {time_taken:.2f} seconds")
-    print(f"Accuracy: {accuracy:.2f}%")
-    print(f"Typing Speed: {words_per_minute:.2f} WPM")
-    
+root = tk.Tk()
+root.title("Typeracer Game")
 
-def main():
-    while True:
-        typing_game() #to start the game
-        replay = input("Do you want to play again? (yes/no): ")
-        if replay != "yes":
-            print("Thanks for playing!")
-            break
+# Widgets
+passage_label = tk.Label(root, text="", wraplength=400)
+passage_label.pack(pady=10)
 
-if __name__ == "__main__":
-    main()
+passage_text = tk.Text(root, height=4, width=50, wrap=tk.WORD, state=tk.DISABLED)
+passage_text.pack(pady=10)
 
+user_input = tk.Entry(root, width=50)
+user_input.pack(pady=10)
+
+check_button = tk.Button(root, text="Finish", command=check_typing)
+check_button.pack(pady=10)
+
+start_button = tk.Button(root, text="Start Game", command=start_typing_game)
+start_button.pack(pady=10)
+
+root.mainloop()
