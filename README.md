@@ -62,5 +62,4 @@ Music Not Playing: Ensure the music file is correctly placed and named. Check fo
 Library Issues: Verify that Pygame is installed properly. You can reinstall it using pip.
 
 ### Play Online
-You can also play the game directly on Itch.io. Enjoy the game online without needing to download anything!
-[Itch.io](https://mxrkydev.itch.io/simple-python-typeracer)
+[Download and Play](https://mxrkydev.itch.io/simple-python-typeracer)
