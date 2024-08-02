@@ -28,7 +28,7 @@ To set up and play the Typing Game locally, follow these steps:
 First, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/mxrky4/Simple_Python_Typeracer.git
+git clone https://github.com/maljunkul/Simple_Python_Typeracer.git
 cd Simple_Python_Typeracer
 ```
 
